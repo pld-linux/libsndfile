@@ -13,6 +13,7 @@ Source0:	http://www.zip.com.au/~erikd/libsndfile/%{name}-%{version}.tar.gz
 Patch0:		%{name}-autoconf.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	libtool
 URL:		http://www.zip.com.au/~erikd/libsndfile/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -62,6 +63,7 @@ Biblioteki statyczne libsndfile.
 %patch -p1
 
 %build
+libtoolize --copy --force
 aclocal
 autoconf
 rm -f missing
