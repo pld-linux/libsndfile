@@ -1,17 +1,16 @@
 Summary:	C library for reading and writing files containing sampled sound
 Summary:	Biblioteka obs³ugi plików d¼wiêkowych
 Name:		libsndfile
-Version:	0.0.21
+Version:	0.0.22
 Release:	1
 License:	GPL
 Group:		Development/Libraries
-Group(pl):	Programowanie/Biblioteki
+Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
+Group(pl):	Programowanie/Biblioteki
 Vendor:		Erik de Castro Lopo <erikd@zip.com.au>
 Source0:	http://www.zip.com.au/~erikd/libsndfile/%{name}-%{version}.tar.gz
-Patch0:		%{name}-autoconf.patch
 URL:		http://www.zip.com.au/~erikd/libsndfile/
-BuildRequires:	autoconf
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -29,6 +28,8 @@ interfejs.
 Summary:	libsndfile header files and development documentation
 Summary(pl):	Pliki nag³ówkowe oraz dokumentacja do libsndfile
 Group:		Development/Libraries
+Group(de):	Entwicklung/Libraries
+Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
 Requires:	%{name} = %{version}
 
@@ -42,6 +43,8 @@ Pliki nag³ówkowe oraz dokumentacja do biblioteki libsndfile.
 Summary:	libsndfile static libraries
 Summary(pl):	Biblioteki statyczne libsndfile
 Group:		Development/Libraries
+Group(de):	Entwicklung/Libraries
+Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
 Requires:	%{name}-devel = %{version}
 
@@ -53,12 +56,8 @@ Biblioteki statyczne libsndfile.
 
 %prep
 %setup -q
-%patch -p1
 
 %build
-aclocal
-autoconf
-LDFLAGS="-s"; export LDFLAGS
 %configure
 %{__make}
 
@@ -67,8 +66,6 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_applnkdir}/Multimedia,%{_datadir}/pixmaps}
 
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
-
-strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*.so.*.*
 
 gzip -9nf NEWS TODO
 
