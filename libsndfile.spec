@@ -2,7 +2,7 @@ Summary:	C library for reading and writing files containing sampled sound
 Summary:	Biblioteka obs³ugi plików d¼wiêkowych
 Name:		libsndfile
 Version:	0.0.22
-Release:	1
+Release:	2
 License:	GPL
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
@@ -12,6 +12,7 @@ Vendor:		Erik de Castro Lopo <erikd@zip.com.au>
 Source0:	http://www.zip.com.au/~erikd/libsndfile/%{name}-%{version}.tar.gz
 Patch0:		%{name}-autoconf.patch
 BuildRequires:	autoconf
+BuildRequires:	automake
 URL:		http://www.zip.com.au/~erikd/libsndfile/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -61,13 +62,14 @@ Biblioteki statyczne libsndfile.
 %patch -p1
 
 %build
+aclocal
 autoconf
+automake -a -c
 %configure
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_applnkdir}/Multimedia,%{_datadir}/pixmaps}
 
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
 
@@ -81,7 +83,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc {NEWS,TODO}.gz doc/*.html doc/*.jpg
+%doc *.gz doc/*.html doc/*.jpg
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
 
 %files devel
