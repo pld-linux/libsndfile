@@ -1,15 +1,15 @@
 Summary:	C library for reading and writing files containing sampled sound
 Summary(pl):	Biblioteka obs³ugi plików d¼wiêkowych
 Name:		libsndfile
-Version:	1.0.6
+Version:	1.0.7
 Release:	1
 License:	LGPL v2.1+
 Vendor:		Erik de Castro Lopo <erikd@zip.com.au>
 Group:		Development/Libraries
-Source0:	http://www.zip.com.au/~erikd/libsndfile/%{name}-%{version}.tar.gz
-# Source0-md5:	b41c421d83bd7c214a79f8dde358f2e0
+Source0:	http://www.mega-nerd.com/%{name}/%{name}-%{version}.tar.gz
+# Source0-md5:	945661a01235f7c149f561a12dad30b6
 Patch0:		%{name}-sh.patch
-URL:		http://www.zip.com.au/~erikd/libsndfile/
+URL:		http://www.mega-nerd.com/libsndfile/
 BuildRequires:	autoconf >= 2.54
 BuildRequires:	automake
 BuildRequires:	libtool
@@ -31,7 +31,7 @@ interfejs.
 Summary:	libsndfile header files and development documentation
 Summary(pl):	Pliki nag³ówkowe oraz dokumentacja do libsndfile
 Group:		Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 Obsoletes:	libsndfile1-devel
 
 %description devel
@@ -44,7 +44,7 @@ Pliki nag³ówkowe oraz dokumentacja do biblioteki libsndfile.
 Summary:	libsndfile static libraries
 Summary(pl):	Biblioteki statyczne libsndfile
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 libsndfile static libraries.
