@@ -1,14 +1,18 @@
 Summary:	C library for reading and writing files containing sampled sound
 Summary:	Biblioteka obsЁugi plikСw d╪wiЙkowych
 Name:		libsndfile
-Version:	0.0.26
+Version:	0.0.27
 Release:	1
 License:	GPL
+Vendor:		Erik de Castro Lopo <erikd@zip.com.au>
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
+Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
-Vendor:		Erik de Castro Lopo <erikd@zip.com.au>
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(ru):	Разработка/Библиотеки
+Group(uk):	Розробка/Б╕бл╕отеки
 Source0:	http://www.zip.com.au/~erikd/libsndfile/%{name}-%{version}.tar.gz
 Patch0:		%{name}-autoconf.patch
 BuildRequires:	autoconf
@@ -33,8 +37,12 @@ Summary:	libsndfile header files and development documentation
 Summary(pl):	Pliki nagЁСwkowe oraz dokumentacja do libsndfile
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
+Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(ru):	Разработка/Библиотеки
+Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name} = %{version}
 
 %description devel
@@ -48,8 +56,12 @@ Summary:	libsndfile static libraries
 Summary(pl):	Biblioteki statyczne libsndfile
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
+Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(ru):	Разработка/Библиотеки
+Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name}-devel = %{version}
 
 %description static
