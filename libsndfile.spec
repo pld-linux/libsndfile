@@ -1,5 +1,5 @@
 Summary:	C library for reading and writing files containing sampled sound
-Summary:	Biblioteka obs³ugi plików d¼wiêkowych
+Summary(pl):	Biblioteka obs³ugi plików d¼wiêkowych
 Name:		libsndfile
 Version:	1.0.1
 Release:	2
@@ -59,8 +59,8 @@ Requires:	%{name}
 Requires:	octave
 
 %description octave
-A couple of script files for loading, saving, and playing sound
-files from within Octave.
+A couple of script files for loading, saving, and playing sound files
+from within Octave.
 
 %description octave -l pl
 Kilka skryptów Octave do ³adowania, zapisywania i odtwarzania plików
