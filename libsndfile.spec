@@ -1,18 +1,19 @@
 Summary:	C library for reading and writing files containing sampled sound
-Summary:	Biblioteka obs³ugi plików d¼wiêkowych
+Summary(pl):	Biblioteka obs³ugi plików d¼wiêkowych
 Name:		libsndfile
-Version:	1.0.1
+Version:	1.0.5
 Release:	1
 License:	GPL
 Vendor:		Erik de Castro Lopo <erikd@zip.com.au>
 Group:		Development/Libraries
 Source0:	http://www.zip.com.au/~erikd/libsndfile/%{name}-%{version}.tar.gz
-Patch0:		%{name}-amfix.patch
+# Source0-md5: 41d0c91fbdf88bb26ac5e0eb857bd611
 URL:		http://www.zip.com.au/~erikd/libsndfile/
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.54
 BuildRequires:	automake
 BuildRequires:	libtool
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+Obsoletes:	libsndfile1
 
 %description
 Libsndfile is a C library for reading and writing files containing
@@ -30,6 +31,7 @@ Summary:	libsndfile header files and development documentation
 Summary(pl):	Pliki nag³ówkowe oraz dokumentacja do libsndfile
 Group:		Development/Libraries
 Requires:	%{name} = %{version}
+Obsoletes:	libsndfile1-devel
 
 %description devel
 Header files and development documentation for libsndfile.
@@ -57,8 +59,8 @@ Requires:	%{name}
 Requires:	octave
 
 %description octave
-A couple of script files for loading, saving, and playing sound
-files from within Octave.
+A couple of script files for loading, saving, and playing sound files
+from within Octave.
 
 %description octave -l pl
 Kilka skryptów Octave do ³adowania, zapisywania i odtwarzania plików
@@ -66,13 +68,12 @@ d¼wiêkowych.
 
 %prep
 %setup -q
-%patch -p1
 
 %build
-%{__libtoolize}
-aclocal
-%{__autoconf}
 rm -f missing
+%{__libtoolize}
+%{__aclocal}
+%{__autoconf}
 %{__automake}
 %configure
 %{__make}
@@ -80,7 +81,8 @@ rm -f missing
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install DESTDIR=$RPM_BUILD_ROOT
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -99,7 +101,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc doc/*.html doc/*.jpg
 %attr(755,root,root) %{_libdir}/lib*.so
-%attr(755,root,root) %{_libdir}/lib*.la
+%{_libdir}/lib*.la
 %{_includedir}/*
 %{_pkgconfigdir}/*.pc
 
