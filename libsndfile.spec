@@ -1,7 +1,7 @@
 Summary:	C library for reading and writing files containing sampled sound
 Summary:	Biblioteka obs³ugi plików d¼wiêkowych
 Name:		libsndfile
-Version:	0.0.28
+Version:	1.0.1
 Release:	1
 License:	GPL
 Vendor:		Erik de Castro Lopo <erikd@zip.com.au>
@@ -49,9 +49,23 @@ libsndfile static libraries.
 %description static -l pl
 Biblioteki statyczne libsndfile.
 
+%package octave
+Summary:	libsndfile modules for octave
+Summary(pl):	modu³y libsndfile dla octave
+Group:		Applications/Math
+Requires:	%{name}
+Requires:	octave
+
+%description octave
+A couple of script files for loading, saving, and playing sound
+files from within Octave.
+
+%description octave -l pl
+Kilka skryptów Octave do ³adowania, zapisywania i odtwarzania plików
+d¼wiêkowych.
+
 %prep
 %setup -q
-%patch -p1
 
 %build
 %{__libtoolize}
@@ -79,6 +93,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc *.gz doc/*.html doc/*.jpg
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
+%attr(744,root,root) %{_bindir}/*
+%{_mandir}/man1/*
 
 %files devel
 %defattr(644,root,root,755)
@@ -89,3 +105,7 @@ rm -rf $RPM_BUILD_ROOT
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/lib*.a
+
+%files octave
+%defattr(644,root,root,755)
+%{_datadir}/octave/site/m/*
