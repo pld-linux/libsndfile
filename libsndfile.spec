@@ -2,7 +2,7 @@ Summary:	C library for reading and writing files containing sampled sound
 Summary:	Biblioteka obs³ugi plików d¼wiêkowych
 Name:		libsndfile
 Version:	1.0.1
-Release:	1
+Release:	2
 License:	GPL
 Vendor:		Erik de Castro Lopo <erikd@zip.com.au>
 Group:		Development/Libraries
@@ -13,6 +13,7 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+Obsoletes:	libsndfile1
 
 %description
 Libsndfile is a C library for reading and writing files containing
@@ -30,6 +31,7 @@ Summary:	libsndfile header files and development documentation
 Summary(pl):	Pliki nag³ówkowe oraz dokumentacja do libsndfile
 Group:		Development/Libraries
 Requires:	%{name} = %{version}
+Obsoletes:	libsndfile1-devel
 
 %description devel
 Header files and development documentation for libsndfile.
