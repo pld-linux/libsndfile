@@ -7,6 +7,7 @@ License:	GPL
 Vendor:		Erik de Castro Lopo <erikd@zip.com.au>
 Group:		Development/Libraries
 Source0:	http://www.zip.com.au/~erikd/libsndfile/%{name}-%{version}.tar.gz
+# Source0-md5: 41d0c91fbdf88bb26ac5e0eb857bd611
 URL:		http://www.zip.com.au/~erikd/libsndfile/
 BuildRequires:	autoconf >= 2.54
 BuildRequires:	automake
