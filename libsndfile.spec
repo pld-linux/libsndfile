@@ -1,7 +1,7 @@
 Summary:	C library for reading and writing files containing sampled sound
 Summary:	Biblioteka obs³ugi plików d¼wiêkowych
 Name:		libsndfile
-Version:	0.0.18
+Version:	0.0.19
 Release:	1
 License:	GPL
 Group:		Development/Libraries
@@ -14,14 +14,15 @@ BuildRequires:	autoconf
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-Libsndfile is a C library for reading and writing files containing sampled
-sound (such as MS Windows WAV and the Apple/SGI AIFF format) through one
-standard library interface.
+Libsndfile is a C library for reading and writing files containing
+sampled sound (such as MS Windows WAV and the Apple/SGI AIFF format)
+through one standard library interface.
 
 %description -l pl
-Libsndfile to bibliotek± napisan± w C, s³u¿±ca do czytania i zapisywania
-plików zawieraj±cych zsamplowany d¼wiêk (np. w formacie MS Windows WAV czy
-Apple/SGI AIFF) poprzez jednolity, standardowy interfejs.
+Libsndfile to bibliotek± napisan± w C, s³u¿±ca do czytania i
+zapisywania plików zawieraj±cych zsamplowany d¼wiêk (np. w formacie MS
+Windows WAV czy Apple/SGI AIFF) poprzez jednolity, standardowy
+interfejs.
 
 %package devel
 Summary:	libsndfile header files and development documentation
@@ -88,4 +89,5 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/*
 
 %files static
-%attr(644,root,root) %{_libdir}/lib*.a
+%defattr(644,root,root,755)
+%{_libdir}/lib*.a
