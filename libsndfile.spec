@@ -8,7 +8,6 @@ Vendor:		Erik de Castro Lopo <erikd@zip.com.au>
 Group:		Development/Libraries
 Source0:	http://www.mega-nerd.com/%{name}/%{name}-%{version}.tar.gz
 # Source0-md5:	1d2b43d0de3eb27e421be2b90b3a952d
-Patch0:		%{name}-sh.patch
 URL:		http://www.mega-nerd.com/libsndfile/
 BuildRequires:	autoconf >= 2.54
 BuildRequires:	automake
@@ -54,9 +53,9 @@ Biblioteki statyczne libsndfile.
 
 %package octave
 Summary:	libsndfile modules for octave
-Summary(pl):	modu³y libsndfile dla octave
+Summary(pl):	Modu³y libsndfile dla octave
 Group:		Applications/Math
-Requires:	%{name}
+Requires:	%{name} = %{version}-%{release}
 Requires:	octave
 
 %description octave
@@ -69,7 +68,6 @@ d¼wiêkowych.
 
 %prep
 %setup -q
-#%patch0 -p1
 
 %build
 %{__libtoolize}
