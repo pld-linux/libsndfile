@@ -1,21 +1,19 @@
 Summary:	C library for reading and writing files containing sampled sound
-Summary:	Biblioteka obs³ugi plików d¼wiêkowych
+Summary(pl):	Biblioteka obs³ugi plików d¼wiêkowych
 Name:		libsndfile
-Version:	0.0.25
+Version:	1.0.5
 Release:	1
 License:	GPL
-Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
 Vendor:		Erik de Castro Lopo <erikd@zip.com.au>
+Group:		Development/Libraries
 Source0:	http://www.zip.com.au/~erikd/libsndfile/%{name}-%{version}.tar.gz
-Patch0:		%{name}-autoconf.patch
-BuildRequires:	autoconf
+# Source0-md5: 41d0c91fbdf88bb26ac5e0eb857bd611
+URL:		http://www.zip.com.au/~erikd/libsndfile/
+BuildRequires:	autoconf >= 2.54
 BuildRequires:	automake
 BuildRequires:	libtool
-URL:		http://www.zip.com.au/~erikd/libsndfile/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+Obsoletes:	libsndfile1
 
 %description
 Libsndfile is a C library for reading and writing files containing
@@ -32,10 +30,8 @@ interfejs.
 Summary:	libsndfile header files and development documentation
 Summary(pl):	Pliki nag³ówkowe oraz dokumentacja do libsndfile
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
 Requires:	%{name} = %{version}
+Obsoletes:	libsndfile1-devel
 
 %description devel
 Header files and development documentation for libsndfile.
@@ -47,9 +43,6 @@ Pliki nag³ówkowe oraz dokumentacja do biblioteki libsndfile.
 Summary:	libsndfile static libraries
 Summary(pl):	Biblioteki statyczne libsndfile
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
 Requires:	%{name}-devel = %{version}
 
 %description static
@@ -58,25 +51,38 @@ libsndfile static libraries.
 %description static -l pl
 Biblioteki statyczne libsndfile.
 
+%package octave
+Summary:	libsndfile modules for octave
+Summary(pl):	modu³y libsndfile dla octave
+Group:		Applications/Math
+Requires:	%{name}
+Requires:	octave
+
+%description octave
+A couple of script files for loading, saving, and playing sound files
+from within Octave.
+
+%description octave -l pl
+Kilka skryptów Octave do ³adowania, zapisywania i odtwarzania plików
+d¼wiêkowych.
+
 %prep
 %setup -q
-%patch -p1
 
 %build
-libtoolize --copy --force
-aclocal
-autoconf
 rm -f missing
-automake -a -c
+%{__libtoolize}
+%{__aclocal}
+%{__autoconf}
+%{__automake}
 %configure
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install DESTDIR=$RPM_BUILD_ROOT
-
-gzip -9nf NEWS TODO
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -86,15 +92,23 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc *.gz doc/*.html doc/*.jpg
+%doc NEWS TODO
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
+%attr(744,root,root) %{_bindir}/*
+%{_mandir}/man1/*
 
 %files devel
 %defattr(644,root,root,755)
+%doc doc/*.html doc/*.jpg
 %attr(755,root,root) %{_libdir}/lib*.so
-%attr(755,root,root) %{_libdir}/lib*.la
+%{_libdir}/lib*.la
 %{_includedir}/*
+%{_pkgconfigdir}/*.pc
 
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/lib*.a
+
+%files octave
+%defattr(644,root,root,755)
+%{_datadir}/octave/site/m/*
