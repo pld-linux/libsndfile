@@ -7,11 +7,11 @@ License:	GPL
 Vendor:		Erik de Castro Lopo <erikd@zip.com.au>
 Group:		Development/Libraries
 Source0:	http://www.zip.com.au/~erikd/libsndfile/%{name}-%{version}.tar.gz
-Patch0:		%{name}-autoconf.patch
+Patch0:		%{name}-amfix.patch
+URL:		http://www.zip.com.au/~erikd/libsndfile/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
-URL:		http://www.zip.com.au/~erikd/libsndfile/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -66,6 +66,7 @@ d¼wiêkowych.
 
 %prep
 %setup -q
+%patch -p1
 
 %build
 %{__libtoolize}
@@ -81,8 +82,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
 
-gzip -9nf NEWS TODO
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -91,16 +90,18 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc *.gz doc/*.html doc/*.jpg
+%doc NEWS TODO
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
 %attr(744,root,root) %{_bindir}/*
 %{_mandir}/man1/*
 
 %files devel
 %defattr(644,root,root,755)
+%doc doc/*.html doc/*.jpg
 %attr(755,root,root) %{_libdir}/lib*.so
 %attr(755,root,root) %{_libdir}/lib*.la
 %{_includedir}/*
+%{_pkgconfigdir}/*.pc
 
 %files static
 %defattr(644,root,root,755)
