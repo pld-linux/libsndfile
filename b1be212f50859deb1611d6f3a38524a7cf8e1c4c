@@ -1,0 +1,1 @@
+p release 3: "rm -f missing" before run automake.
