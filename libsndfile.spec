@@ -2,7 +2,7 @@ Summary:	C library for reading and writing files containing sampled sound
 Summary:	Biblioteka obs³ugi plików d¼wiêkowych
 Name:		libsndfile
 Version:	0.0.22
-Release:	2
+Release:	3
 License:	GPL
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
@@ -64,6 +64,7 @@ Biblioteki statyczne libsndfile.
 %build
 aclocal
 autoconf
+rm -f missing
 automake -a -c
 %configure
 %{__make}
