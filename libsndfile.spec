@@ -1,13 +1,14 @@
 Summary:	C library for reading and writing files containing sampled sound
 Summary(pl):	Biblioteka obs³ugi plików d¼wiêkowych
 Name:		libsndfile
-Version:	1.0.5
+Version:	1.0.6
 Release:	1
-License:	GPL
+License:	LGPL v2.1+
 Vendor:		Erik de Castro Lopo <erikd@zip.com.au>
 Group:		Development/Libraries
 Source0:	http://www.zip.com.au/~erikd/libsndfile/%{name}-%{version}.tar.gz
-# Source0-md5: 41d0c91fbdf88bb26ac5e0eb857bd611
+# Source0-md5:	b41c421d83bd7c214a79f8dde358f2e0
+Patch0:		%{name}-sh.patch
 URL:		http://www.zip.com.au/~erikd/libsndfile/
 BuildRequires:	autoconf >= 2.54
 BuildRequires:	automake
@@ -68,9 +69,9 @@ d¼wiêkowych.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
-rm -f missing
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
