@@ -1,14 +1,16 @@
 Summary:	C library for reading and writing files containing sampled sound
-Summary:	Biblioteka obs³ugi plików d¼wiêkowych.
+Summary:	Biblioteka obs³ugi plików d¼wiêkowych
 Name:		libsndfile
 Version:	0.0.18
 Release:	1
 License:	GPL
 Group:		Development/Libraries
 Group(fr):	Development/Librairies
-Source0:	http://www.zip.com.au/~erikd/libsndfile/%{name}-%{version}.tar.gz
-URL:		http://www.zip.com.au/~erikd/libsndfile/
 Vendor:		Erik de Castro Lopo <erikd@zip.com.au>
+Source0:	http://www.zip.com.au/~erikd/libsndfile/%{name}-%{version}.tar.gz
+Patch0:		libsndfile-autoconf.patch
+URL:		http://www.zip.com.au/~erikd/libsndfile/
+BuildRequires:	autoconf
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -18,9 +20,9 @@ standard library interface.
 
 %description -l pl
 Libsndfile to bibliotek± napisan± w C, s³u¿±ca do czytania i zapisywania
-plików zawieraj±cych zsamplowany d¼wiêk (np. w formacie MS Windows WAV
-czy Apple/SGI AIFF) poprzez jednolity, standardowy interfejs.
-	    
+plików zawieraj±cych zsamplowany d¼wiêk (np. w formacie MS Windows WAV czy
+Apple/SGI AIFF) poprzez jednolity, standardowy interfejs.
+
 %package devel
 Summary:	libsndfile header files and development documentation
 Summary(pl):	Pliki nag³ówkowe oraz dokumentacja do libsndfile
@@ -49,18 +51,23 @@ Biblioteki statyczne libsndfile.
 
 %prep
 %setup -q
+%patch -p1
 
 %build
-LDFLAGS="-s"; export LDLAGS
+aclocal
+autoconf
+LDFLAGS="-s"; export LDFLAGS
 %configure
 make
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
 install -d $RPM_BUILD_ROOT{%{_applnkdir}/Multimedia,%{_datadir}/pixmaps}
+
 make install DESTDIR=$RPM_BUILD_ROOT
+
 strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*.so.*.*
+
 gzip -9nf NEWS TODO
 
 %clean
@@ -81,5 +88,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/*
 
 %files static
-%defattr(644,root,root,755)
-%{_libdir}/lib*.a
+%attr(644,root,root) %{_libdir}/lib*.a
