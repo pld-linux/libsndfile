@@ -10,6 +10,8 @@ Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
 Vendor:		Erik de Castro Lopo <erikd@zip.com.au>
 Source0:	http://www.zip.com.au/~erikd/libsndfile/%{name}-%{version}.tar.gz
+Patch0:		%{name}-autoconf.patch
+BuildRequires:	autoconf
 URL:		http://www.zip.com.au/~erikd/libsndfile/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -56,8 +58,10 @@ Biblioteki statyczne libsndfile.
 
 %prep
 %setup -q
+%patch -p1
 
 %build
+autoconf
 %configure
 %{__make}
 

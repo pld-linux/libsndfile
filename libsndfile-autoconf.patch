@@ -1,0 +1,20 @@
+diff -Nru libsndfile-0.0.22/configure.in libsndfile-0.0.22.new/configure.in
+--- libsndfile-0.0.22/configure.in	Mon Oct 16 13:11:45 2000
++++ libsndfile-0.0.22.new/configure.in	Thu Oct 19 03:43:33 2000
+@@ -47,16 +47,6 @@
+ AC_ARG_ENABLE(gcc-pipe, [  --disable-gcc-pipe      disable gcc -pipe option ],
+ 	ac_arg_gcc_pipe="N", ac_arg_gcc_pipe="Y")
+ 
+-if test $ac_cv_prog_gcc = yes ; then
+-	CFLAGS="-g -O2 -Wall -pedantic -Wstrict-prototypes"
+-	dnl CFLAGS="-g -O0 -Wall -Werror -Wstrict-prototypes"
+-	dnl AC_MSG_WARN([**** Optimisation has been switched off. ****])
+-	
+-	if test $ac_arg_gcc_pipe != "N" ; then
+-	 	CFLAGS="$CFLAGS -pipe"
+-	 	fi
+-	fi
+-	
+ if test $cross_compiling = yes ; then
+ 	AC_MSG_WARN([******************************************************************])
+ 	AC_MSG_WARN([*** We are cross-compiling, so have to assume sizeof (short) == 2 ])
