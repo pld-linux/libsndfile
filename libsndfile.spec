@@ -2,7 +2,7 @@ Summary:	C library for reading and writing files containing sampled sound
 Summary(pl):	Biblioteka obs³ugi plików d¼wiêkowych
 Name:		libsndfile
 Version:	1.0.11
-Release:	1
+Release:	2
 License:	LGPL v2.1+
 Vendor:		Erik de Castro Lopo <erikd@zip.com.au>
 Group:		Development/Libraries
