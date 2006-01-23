@@ -1,13 +1,13 @@
 Summary:	C library for reading and writing files containing sampled sound
 Summary(pl):	Biblioteka obs³ugi plików d¼wiêkowych
 Name:		libsndfile
-Version:	1.0.12
+Version:	1.0.13
 Release:	1
 License:	LGPL v2.1+
 Vendor:		Erik de Castro Lopo <erikd@zip.com.au>
 Group:		Development/Libraries
 Source0:	http://www.mega-nerd.com/libsndfile/%{name}-%{version}.tar.gz
-# Source0-md5:	03718b7b225b298f41c19620b8906108
+# Source0-md5:	8bd169ff38d780f37844bea76c43d18d
 URL:		http://www.mega-nerd.com/libsndfile/
 BuildRequires:	autoconf >= 2.54
 BuildRequires:	automake
@@ -85,6 +85,8 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+rm -rf $RPM_BUILD_ROOT%{_docdir}/libsndfile1-dev
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -93,7 +95,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc NEWS TODO
+%doc AUTHORS ChangeLog NEWS README TODO
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
 %{_mandir}/man1/*
