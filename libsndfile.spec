@@ -1,3 +1,8 @@
+#
+# Conditional build:
+%bcond_without	sqlite		# disable use of sqlite
+%bcond_without	static_libs	# don't build static library
+#
 Summary:	C library for reading and writing files containing sampled sound
 Summary(pl):	Biblioteka obs³ugi plików d¼wiêkowych
 Name:		libsndfile
@@ -9,10 +14,13 @@ Group:		Development/Libraries
 Source0:	http://www.mega-nerd.com/libsndfile/%{name}-%{version}.tar.gz
 # Source0-md5:	773b6639672d39b6342030c7fd1e9719
 URL:		http://www.mega-nerd.com/libsndfile/
+BuildRequires:	alsa-lib-devel
 BuildRequires:	autoconf >= 2.54
 BuildRequires:	automake
 BuildRequires:	flac-devel >= 1.1.1
 BuildRequires:	libtool
+BuildRequires:	pkgconfig
+%{?with_sqlite:BuildRequires:	sqlite3-devel}
 Obsoletes:	libsndfile1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -76,7 +84,10 @@ d¼wiêkowych.
 %{__aclocal}
 %{__autoconf}
 %{__automake}
-%configure
+%configure \
+	%{!?with_static_libs:--disable-static} \
+	%{!?with_sqlite:--disable-sqlite}
+
 %{__make}
 
 %install
@@ -108,9 +119,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/*
 %{_pkgconfigdir}/*.pc
 
+%if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/lib*.a
+%endif
 
 %files octave
 %defattr(644,root,root,755)
