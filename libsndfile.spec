@@ -2,6 +2,7 @@
 # Conditional build:
 %bcond_without	sqlite		# disable use of sqlite
 %bcond_without	static_libs	# don't build static library
+%bcond_without	tests		# don't build tests
 #
 Summary:	C library for reading and writing files containing sampled sound
 Summary(pl):	Biblioteka obs³ugi plików d¼wiêkowych
@@ -19,8 +20,10 @@ BuildRequires:	alsa-lib-devel
 BuildRequires:	autoconf >= 2.54
 BuildRequires:	automake
 BuildRequires:	flac-devel >= 1.1.3
+%{?with_tests:BuildRequires:	libstdc++-devel}
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
+BuildRequires:	sed >= 4.0
 %{?with_sqlite:BuildRequires:	sqlite3-devel}
 Obsoletes:	libsndfile1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -80,6 +83,10 @@ d¼wiêkowych.
 %prep
 %setup -q
 %patch0 -p1
+
+%if %{without tests}
+%{__sed} -i 's, tests$,,' Makefile.am
+%endif
 
 %build
 %{__libtoolize}
