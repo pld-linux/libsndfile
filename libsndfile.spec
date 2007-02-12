@@ -5,7 +5,7 @@
 %bcond_without	tests		# don't build tests
 #
 Summary:	C library for reading and writing files containing sampled sound
-Summary(pl):	Biblioteka obs≥ugi plikÛw dºwiÍkowych
+Summary(pl.UTF-8):   Biblioteka obs≈Çugi plik√≥w d≈∫wiƒôkowych
 Name:		libsndfile
 Version:	1.0.17
 Release:	2
@@ -33,15 +33,15 @@ Libsndfile is a C library for reading and writing files containing
 sampled sound (such as MS Windows WAV and the Apple/SGI AIFF format)
 through one standard library interface.
 
-%description -l pl
-Libsndfile to bibliotek± napisan± w C, s≥uø±ca do czytania i
-zapisywania plikÛw zawieraj±cych zsamplowany dºwiÍk (np. w formacie MS
+%description -l pl.UTF-8
+Libsndfile to bibliotekƒÖ napisanƒÖ w C, s≈Çu≈ºƒÖca do czytania i
+zapisywania plik√≥w zawierajƒÖcych zsamplowany d≈∫wiƒôk (np. w formacie MS
 Windows WAV czy Apple/SGI AIFF) poprzez jednolity, standardowy
 interfejs.
 
 %package devel
 Summary:	libsndfile header files and development documentation
-Summary(pl):	Pliki nag≥Ûwkowe oraz dokumentacja do libsndfile
+Summary(pl.UTF-8):   Pliki nag≈Ç√≥wkowe oraz dokumentacja do libsndfile
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	flac-devel >= 1.1.1
@@ -50,24 +50,24 @@ Obsoletes:	libsndfile1-devel
 %description devel
 Header files and development documentation for libsndfile.
 
-%description devel -l pl
-Pliki nag≥Ûwkowe oraz dokumentacja do biblioteki libsndfile.
+%description devel -l pl.UTF-8
+Pliki nag≈Ç√≥wkowe oraz dokumentacja do biblioteki libsndfile.
 
 %package static
 Summary:	libsndfile static libraries
-Summary(pl):	Biblioteki statyczne libsndfile
+Summary(pl.UTF-8):   Biblioteki statyczne libsndfile
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 libsndfile static libraries.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Biblioteki statyczne libsndfile.
 
 %package octave
 Summary:	libsndfile modules for octave
-Summary(pl):	Modu≥y libsndfile dla octave
+Summary(pl.UTF-8):   Modu≈Çy libsndfile dla octave
 Group:		Applications/Math
 Requires:	%{name} = %{version}-%{release}
 Requires:	octave
@@ -76,9 +76,9 @@ Requires:	octave
 A couple of script files for loading, saving, and playing sound files
 from within Octave.
 
-%description octave -l pl
-Kilka skryptÛw Octave do ≥adowania, zapisywania i odtwarzania plikÛw
-dºwiÍkowych.
+%description octave -l pl.UTF-8
+Kilka skrypt√≥w Octave do ≈Çadowania, zapisywania i odtwarzania plik√≥w
+d≈∫wiƒôkowych.
 
 %prep
 %setup -q
