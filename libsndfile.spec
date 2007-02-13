@@ -5,7 +5,7 @@
 %bcond_without	tests		# don't build tests
 #
 Summary:	C library for reading and writing files containing sampled sound
-Summary(pl.UTF-8):   Biblioteka obsługi plików dźwiękowych
+Summary(pl.UTF-8):	Biblioteka obsługi plików dźwiękowych
 Name:		libsndfile
 Version:	1.0.17
 Release:	2
@@ -41,7 +41,7 @@ interfejs.
 
 %package devel
 Summary:	libsndfile header files and development documentation
-Summary(pl.UTF-8):   Pliki nagłówkowe oraz dokumentacja do libsndfile
+Summary(pl.UTF-8):	Pliki nagłówkowe oraz dokumentacja do libsndfile
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	flac-devel >= 1.1.1
@@ -55,7 +55,7 @@ Pliki nagłówkowe oraz dokumentacja do biblioteki libsndfile.
 
 %package static
 Summary:	libsndfile static libraries
-Summary(pl.UTF-8):   Biblioteki statyczne libsndfile
+Summary(pl.UTF-8):	Biblioteki statyczne libsndfile
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
@@ -67,7 +67,7 @@ Biblioteki statyczne libsndfile.
 
 %package octave
 Summary:	libsndfile modules for octave
-Summary(pl.UTF-8):   Moduły libsndfile dla octave
+Summary(pl.UTF-8):	Moduły libsndfile dla octave
 Group:		Applications/Math
 Requires:	%{name} = %{version}-%{release}
 Requires:	octave
