@@ -292,8 +292,11 @@
 -		if (FLAC__seekable_stream_decoder_get_state (pflac->fsd) != FLAC__SEEKABLE_STREAM_DECODER_OK)
 +		if (FLAC__stream_decoder_get_state (pflac->fsd) == FLAC__STREAM_DECODER_ABORTED)
  			break ;
++		if (FLAC__stream_decoder_get_state (pflac->fsd) == FLAC__STREAM_DECODER_END_OF_STREAM)
++			break ;
  		} ;
  
+ 	pflac->ptr = NULL ;
 @@ -795,7 +789,7 @@
  	while (len > 0)
  	{	writecount = (len >= bufferlen) ? bufferlen : (int) len ;
