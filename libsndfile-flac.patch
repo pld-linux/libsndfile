@@ -282,7 +282,7 @@
  		psf->dataoffset = position ;
  		} ;
  
-@@ -676,9 +670,9 @@
+@@ -676,10 +670,12 @@
  		flac_buffer_copy (psf) ;
  
  	while (pflac->pos < pflac->len)
