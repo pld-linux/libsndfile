@@ -88,6 +88,7 @@ dźwiękowych.
 Summary:	libsndfile utility programs
 Summary(pl.UTF-8):	Narzędzia korzystające z biblioteki libsndfile
 Group:		Applications/Sound
+Requires:	%{name} = %{version}-%{release}
 
 %description progs
 libsndfile utility programs:
