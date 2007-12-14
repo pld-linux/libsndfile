@@ -1,6 +1,9 @@
+# TODO:
+#	- compare flac.patch with Fedora/Gentoo equivalent
+#	- who needs sndfile-regtest?
 #
 # Conditional build:
-%bcond_without	sqlite		# disable use of sqlite
+%bcond_with	regtest		# build sndfile-regtest program
 %bcond_without	static_libs	# don't build static library
 %bcond_without	tests		# don't build tests
 #
@@ -8,13 +11,14 @@ Summary:	C library for reading and writing files containing sampled sound
 Summary(pl.UTF-8):	Biblioteka obsługi plików dźwiękowych
 Name:		libsndfile
 Version:	1.0.17
-Release:	3
+Release:	4
 License:	LGPL v2.1+
 Vendor:		Erik de Castro Lopo <erikd@zip.com.au>
 Group:		Development/Libraries
 Source0:	http://www.mega-nerd.com/libsndfile/%{name}-%{version}.tar.gz
 # Source0-md5:	2d126c35448503f6dbe33934d9581f6b
 Patch0:		%{name}-flac.patch
+Patch1:		%{name}-flac_buffer_overflow.patch
 URL:		http://www.mega-nerd.com/libsndfile/
 BuildRequires:	alsa-lib-devel
 BuildRequires:	autoconf >= 2.54
@@ -24,7 +28,7 @@ BuildRequires:	flac-devel >= 1.1.3
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
 BuildRequires:	sed >= 4.0
-%{?with_sqlite:BuildRequires:	sqlite3-devel}
+%{?with_regtest:BuildRequires:	sqlite3-devel}
 Obsoletes:	libsndfile1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -80,9 +84,27 @@ from within Octave.
 Kilka skryptów Octave do ładowania, zapisywania i odtwarzania plików
 dźwiękowych.
 
+%package progs
+Summary:	libsndfile utility programs
+Summary(pl.UTF-8):	Narzędzia korzystające z biblioteki libsndfile
+Group:		Applications/Graphics
+
+%description progs
+libsndfile utility programs:
+- sndfile-convert − convert a sound files from one format to another
+- sndfile-info − display information about a sound file
+- sndfile-play − play a sound file
+
+%description progs -l pl.UTF-8
+Narzędzia z biblioteki libsndfile:
+- sndfile-convert - kowertertuje pliki dźwiękowe
+- sndfile-info - wyświetla informacje o pliku dźwiękowym
+- sndfile-play - odtwarza pliki dźwiękowe
+
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %if %{without tests}
 %{__sed} -i 's, tests$,,' Makefile.am
@@ -95,9 +117,10 @@ dźwiękowych.
 %{__automake}
 %configure \
 	%{!?with_static_libs:--disable-static} \
-	%{!?with_sqlite:--disable-sqlite}
+	%{!?with_regtest:--disable-sqlite}
 
 %{__make}
+%{?with_tests: %{__make} test}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -116,9 +139,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README TODO
-%attr(755,root,root) %{_bindir}/sndfile-*
 %attr(755,root,root) %{_libdir}/libsndfile.so.*.*
-%{_mandir}/man1/sndfile-*.1*
 
 %files devel
 %defattr(644,root,root,755)
@@ -137,3 +158,10 @@ rm -rf $RPM_BUILD_ROOT
 %files octave
 %defattr(644,root,root,755)
 %{_datadir}/octave/site/m/*
+
+%files progs
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/sndfile-convert
+%attr(755,root,root) %{_bindir}/sndfile-info
+%attr(755,root,root) %{_bindir}/sndfile-play
+%{_mandir}/man1/sndfile-*.1*
