@@ -87,7 +87,7 @@ dźwiękowych.
 %package progs
 Summary:	libsndfile utility programs
 Summary(pl.UTF-8):	Narzędzia korzystające z biblioteki libsndfile
-Group:		Applications/Graphics
+Group:		Applications/Sound
 
 %description progs
 libsndfile utility programs:
