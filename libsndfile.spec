@@ -10,15 +10,13 @@
 Summary:	C library for reading and writing files containing sampled sound
 Summary(pl.UTF-8):	Biblioteka obsługi plików dźwiękowych
 Name:		libsndfile
-Version:	1.0.17
-Release:	4
+Version:	1.0.19
+Release:	1
 License:	LGPL v2.1+
 Vendor:		Erik de Castro Lopo <erikd@zip.com.au>
 Group:		Development/Libraries
 Source0:	http://www.mega-nerd.com/libsndfile/%{name}-%{version}.tar.gz
-# Source0-md5:	2d126c35448503f6dbe33934d9581f6b
-Patch0:		%{name}-flac.patch
-Patch1:		%{name}-flac_buffer_overflow.patch
+# Source0-md5:	8fa24b0c0a8758543427c9741ea06924
 URL:		http://www.mega-nerd.com/libsndfile/
 BuildRequires:	alsa-lib-devel
 BuildRequires:	autoconf >= 2.54
@@ -26,6 +24,7 @@ BuildRequires:	automake
 BuildRequires:	flac-devel >= 1.1.3
 %{?with_tests:BuildRequires:	libstdc++-devel}
 BuildRequires:	libtool
+BuildRequires:	octave-devel
 BuildRequires:	pkgconfig
 BuildRequires:	sed >= 4.0
 %{?with_regtest:BuildRequires:	sqlite3-devel}
@@ -104,8 +103,6 @@ Narzędzia z biblioteki libsndfile:
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
 
 %if %{without tests}
 %{__sed} -i 's, tests$,,' Makefile.am
@@ -113,7 +110,7 @@ Narzędzia z biblioteki libsndfile:
 
 %build
 %{__libtoolize}
-%{__aclocal}
+%{__aclocal} -I M4
 %{__autoconf}
 %{__automake}
 %configure \
@@ -162,7 +159,5 @@ rm -rf $RPM_BUILD_ROOT
 
 %files progs
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/sndfile-convert
-%attr(755,root,root) %{_bindir}/sndfile-info
-%attr(755,root,root) %{_bindir}/sndfile-play
+%attr(755,root,root) %{_bindir}/sndfile-*
 %{_mandir}/man1/sndfile-*.1*
