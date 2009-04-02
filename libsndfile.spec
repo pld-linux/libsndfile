@@ -140,7 +140,8 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README TODO
-%attr(755,root,root) %{_libdir}/libsndfile.so.*.*
+%attr(755,root,root) %{_libdir}/libsndfile.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libsndfile.so.1
 
 %files devel
 %defattr(644,root,root,755)
@@ -158,7 +159,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files octave
 %defattr(644,root,root,755)
-%{_datadir}/octave/site/m/*
+%{_datadir}/octave/site/m/sndfile_*.m
+%dir %{_libdir}/octave/*/site/oct/*/sndfile
+%{_libdir}/octave/*/site/oct/*/sndfile/PKG_ADD
+%attr(755,root,root) %{_libdir}/octave/*/site/oct/*/sndfile/sndfile.oct
 
 %files progs
 %defattr(644,root,root,755)
