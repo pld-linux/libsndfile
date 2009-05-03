@@ -11,7 +11,7 @@ Summary:	C library for reading and writing files containing sampled sound
 Summary(pl.UTF-8):	Biblioteka obsługi plików dźwiękowych
 Name:		libsndfile
 Version:	1.0.19
-Release:	2
+Release:	3
 License:	LGPL v2.1+
 Vendor:		Erik de Castro Lopo <erikd@zip.com.au>
 Group:		Development/Libraries
@@ -25,9 +25,11 @@ BuildRequires:	automake
 BuildRequires:	fftw3-devel
 BuildRequires:	flac-devel >= 1.1.3
 BuildRequires:	gcc-fortran
+BuildRequires:	jack-audio-connection-kit-devel
 BuildRequires:	lapack-devel
 %{?with_tests:BuildRequires:	libstdc++-devel}
 BuildRequires:	libtool
+BuildRequires:	libvorbis-devel
 BuildRequires:	octave-devel
 BuildRequires:	pkgconfig
 BuildRequires:	sed >= 4.0
