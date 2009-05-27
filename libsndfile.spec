@@ -10,14 +10,13 @@
 Summary:	C library for reading and writing files containing sampled sound
 Summary(pl.UTF-8):	Biblioteka obsługi plików dźwiękowych
 Name:		libsndfile
-Version:	1.0.19
-Release:	3
+Version:	1.0.20
+Release:	1
 License:	LGPL v2.1+
 Vendor:		Erik de Castro Lopo <erikd@zip.com.au>
 Group:		Development/Libraries
 Source0:	http://www.mega-nerd.com/libsndfile/%{name}-%{version}.tar.gz
-# Source0-md5:	8fa24b0c0a8758543427c9741ea06924
-Patch0:		%{name}-vorbis-test.patch
+# Source0-md5:	e0553e12c7a467af44693e95e2eac668
 URL:		http://www.mega-nerd.com/libsndfile/
 BuildRequires:	alsa-lib-devel
 BuildRequires:	autoconf >= 2.54
@@ -109,7 +108,6 @@ Narzędzia z biblioteki libsndfile:
 
 %prep
 %setup -q
-%patch0 -p1
 
 %if %{without tests}
 %{__sed} -i 's, tests$,,' Makefile.am
@@ -143,7 +141,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS README TODO
+%doc AUTHORS ChangeLog NEWS README
 %attr(755,root,root) %{_libdir}/libsndfile.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libsndfile.so.1
 
