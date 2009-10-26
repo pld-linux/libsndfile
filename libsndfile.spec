@@ -17,6 +17,7 @@ Vendor:		Erik de Castro Lopo <erikd@zip.com.au>
 Group:		Development/Libraries
 Source0:	http://www.mega-nerd.com/libsndfile/%{name}-%{version}.tar.gz
 # Source0-md5:	e0553e12c7a467af44693e95e2eac668
+Patch0:		octave32.patch
 URL:		http://www.mega-nerd.com/libsndfile/
 BuildRequires:	alsa-lib-devel
 BuildRequires:	autoconf >= 2.54
@@ -108,6 +109,7 @@ Narzędzia z biblioteki libsndfile:
 
 %prep
 %setup -q
+%patch0 -p1
 
 %if %{without tests}
 %{__sed} -i 's, tests$,,' Makefile.am

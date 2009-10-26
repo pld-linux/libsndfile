@@ -1,0 +1,15 @@
+--- libsndfile-1.0.20/M4/octave.m4.orig	2009-10-25 15:51:00.461732576 +0100
++++ libsndfile-1.0.20/M4/octave.m4	2009-10-25 15:51:32.459533439 +0100
+@@ -125,6 +125,12 @@
+ 
+ 				OCTAVE_BUILD=yes
+ 				;;
++			3.2.*)
++				OCTAVE_DEST_ODIR=`$OCTAVE_CONFIG --oct-site-dir | sed 's%^/usr%${prefix}%'`
++				OCTAVE_DEST_MDIR=`$OCTAVE_CONFIG --m-site-dir | sed 's%^/usr%${prefix}%'`
++
++				OCTAVE_BUILD=yes
++				;;
+ 			*)
+ 				AC_MSG_WARN([Octave version $MKOCTFILE_VERSION is not supported.])
+ 				;;
