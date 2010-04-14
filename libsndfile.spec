@@ -1,39 +1,39 @@
 # TODO:
-#	- compare flac.patch with Fedora/Gentoo equivalent
 #	- who needs sndfile-regtest?
 #
 # Conditional build:
 %bcond_with	regtest		# build sndfile-regtest program
+%bcond_without	octave		# don't build octave binding
 %bcond_without	static_libs	# don't build static library
 %bcond_without	tests		# don't build tests
 #
 Summary:	C library for reading and writing files containing sampled sound
 Summary(pl.UTF-8):	Biblioteka obsługi plików dźwiękowych
 Name:		libsndfile
-Version:	1.0.20
-Release:	2
+Version:	1.0.21
+Release:	1
 License:	LGPL v2.1+
-Vendor:		Erik de Castro Lopo <erikd@zip.com.au>
 Group:		Development/Libraries
-Source0:	http://www.mega-nerd.com/libsndfile/%{name}-%{version}.tar.gz
-# Source0-md5:	e0553e12c7a467af44693e95e2eac668
+Source0:	http://www.mega-nerd.com/libsndfile/files/%{name}-%{version}.tar.gz
+# Source0-md5:	880a40ec636ab2185b97f8927299b292
 Patch0:		octave32.patch
 URL:		http://www.mega-nerd.com/libsndfile/
 BuildRequires:	alsa-lib-devel
-BuildRequires:	autoconf >= 2.54
+BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake
 BuildRequires:	fftw3-devel
-BuildRequires:	flac-devel >= 1.1.3
+BuildRequires:	flac-devel >= 1.2.1
 BuildRequires:	gcc-fortran
 BuildRequires:	jack-audio-connection-kit-devel
 BuildRequires:	lapack-devel
+BuildRequires:	libogg-devel >= 2:1.1.3
 %{?with_tests:BuildRequires:	libstdc++-devel}
 BuildRequires:	libtool
-BuildRequires:	libvorbis-devel
-BuildRequires:	octave-devel
+BuildRequires:	libvorbis-devel >= 1:1.2.3
+%{?with_octave:BuildRequires:	octave-devel}
 BuildRequires:	pkgconfig
 BuildRequires:	sed >= 4.0
-%{?with_regtest:BuildRequires:	sqlite3-devel}
+%{?with_regtest:BuildRequires:	sqlite3-devel >= 3.2}
 Obsoletes:	libsndfile1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -53,7 +53,7 @@ Summary:	libsndfile header files and development documentation
 Summary(pl.UTF-8):	Pliki nagłówkowe oraz dokumentacja do libsndfile
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	flac-devel >= 1.1.1
+Requires:	flac-devel >= 1.2.1
 Obsoletes:	libsndfile1-devel
 
 %description devel
@@ -97,9 +97,9 @@ Requires:	%{name} = %{version}-%{release}
 
 %description progs
 libsndfile utility programs:
-- sndfile-convert − convert a sound files from one format to another
-- sndfile-info − display information about a sound file
-- sndfile-play − play a sound file
+- sndfile-convert - convert a sound files from one format to another
+- sndfile-info - display information about a sound file
+- sndfile-play - play a sound file
 
 %description progs -l pl.UTF-8
 Narzędzia z biblioteki libsndfile:
@@ -161,12 +161,14 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libsndfile.a
 %endif
 
+%if %{with octave}
 %files octave
 %defattr(644,root,root,755)
 %{_datadir}/octave/site/m/sndfile_*.m
 %dir %{_libdir}/octave/*/site/oct/*/sndfile
 %{_libdir}/octave/*/site/oct/*/sndfile/PKG_ADD
 %attr(755,root,root) %{_libdir}/octave/*/site/oct/*/sndfile/sndfile.oct
+%endif
 
 %files progs
 %defattr(644,root,root,755)
