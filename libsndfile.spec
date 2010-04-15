@@ -21,11 +21,8 @@ URL:		http://www.mega-nerd.com/libsndfile/
 BuildRequires:	alsa-lib-devel
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake
-BuildRequires:	fftw3-devel
 BuildRequires:	flac-devel >= 1.2.1
 BuildRequires:	gcc-fortran
-BuildRequires:	jack-audio-connection-kit-devel
-BuildRequires:	lapack-devel
 BuildRequires:	libogg-devel >= 2:1.1.3
 %{?with_tests:BuildRequires:	libstdc++-devel}
 BuildRequires:	libtool
