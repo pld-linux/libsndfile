@@ -13,7 +13,7 @@ Name:		libsndfile
 Version:	1.0.21
 Release:	1
 License:	LGPL v2.1+
-Group:		Development/Libraries
+Group:		Libraries
 Source0:	http://www.mega-nerd.com/libsndfile/files/%{name}-%{version}.tar.gz
 # Source0-md5:	880a40ec636ab2185b97f8927299b292
 Patch0:		octave32.patch
