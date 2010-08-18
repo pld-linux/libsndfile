@@ -11,7 +11,7 @@ Summary:	C library for reading and writing files containing sampled sound
 Summary(pl.UTF-8):	Biblioteka obsługi plików dźwiękowych
 Name:		libsndfile
 Version:	1.0.21
-Release:	1
+Release:	2
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://www.mega-nerd.com/libsndfile/files/%{name}-%{version}.tar.gz
