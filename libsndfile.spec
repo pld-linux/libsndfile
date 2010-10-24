@@ -10,12 +10,12 @@
 Summary:	C library for reading and writing files containing sampled sound
 Summary(pl.UTF-8):	Biblioteka obsługi plików dźwiękowych
 Name:		libsndfile
-Version:	1.0.21
-Release:	2
+Version:	1.0.23
+Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://www.mega-nerd.com/libsndfile/files/%{name}-%{version}.tar.gz
-# Source0-md5:	880a40ec636ab2185b97f8927299b292
+# Source0-md5:	d0e22b5ff2ef945615db33960376d733
 Patch0:		octave32.patch
 URL:		http://www.mega-nerd.com/libsndfile/
 BuildRequires:	alsa-lib-devel
@@ -31,6 +31,9 @@ BuildRequires:	libvorbis-devel >= 1:1.2.3
 BuildRequires:	pkgconfig
 BuildRequires:	sed >= 4.0
 %{?with_regtest:BuildRequires:	sqlite3-devel >= 3.2}
+Requires:	flac >= 1.2.1
+Requires:	libogg >= 2:1.1.3
+Requires:	libvorbis >= 1:1.2.3
 Obsoletes:	libsndfile1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -51,6 +54,8 @@ Summary(pl.UTF-8):	Pliki nagłówkowe oraz dokumentacja do libsndfile
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	flac-devel >= 1.2.1
+Requires:	libogg-devel >= 2:1.1.3
+Requires:	libvorbis-devel >= 1:1.2.3
 Obsoletes:	libsndfile1-devel
 
 %description devel
@@ -71,21 +76,6 @@ libsndfile static libraries.
 %description static -l pl.UTF-8
 Biblioteki statyczne libsndfile.
 
-%package octave
-Summary:	libsndfile modules for octave
-Summary(pl.UTF-8):	Moduły libsndfile dla octave
-Group:		Applications/Math
-Requires:	%{name} = %{version}-%{release}
-Requires:	octave
-
-%description octave
-A couple of script files for loading, saving, and playing sound files
-from within Octave.
-
-%description octave -l pl.UTF-8
-Kilka skryptów Octave do ładowania, zapisywania i odtwarzania plików
-dźwiękowych.
-
 %package progs
 Summary:	libsndfile utility programs
 Summary(pl.UTF-8):	Narzędzia korzystające z biblioteki libsndfile
@@ -104,6 +94,22 @@ Narzędzia z biblioteki libsndfile:
 - sndfile-info - wyświetla informacje o pliku dźwiękowym
 - sndfile-play - odtwarza pliki dźwiękowe
 
+%package -n octave-sndfile
+Summary:	sndfile module for Octave
+Summary(pl.UTF-8):	Moduł sndfile dla Octave
+Group:		Applications/Math
+Requires:	%{name} = %{version}-%{release}
+Requires:	octave
+Obsoletes:	libsndfile-octave
+
+%description -n octave-sndfile
+A couple of script files for loading, saving, and playing sound files
+from within Octave.
+
+%description -n octave-sndfile -l pl.UTF-8
+Kilka skryptów Octave do ładowania, zapisywania i odtwarzania plików
+dźwiękowych.
+
 %prep
 %setup -q
 %patch0 -p1
@@ -121,7 +127,8 @@ Narzędzia z biblioteki libsndfile:
 	%{!?with_static_libs:--disable-static} \
 	%{!?with_regtest:--disable-sqlite}
 
-%{__make}
+%{__make} \
+	V=1
 %{?with_tests: %{__make} test}
 
 %install
@@ -130,7 +137,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-rm -rf $RPM_BUILD_ROOT%{_docdir}/libsndfile1-dev
+%{__rm} -r $RPM_BUILD_ROOT%{_docdir}/libsndfile1-dev
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -158,16 +165,16 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libsndfile.a
 %endif
 
+%files progs
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/sndfile-*
+%{_mandir}/man1/sndfile-*.1*
+
 %if %{with octave}
-%files octave
+%files -n octave-sndfile
 %defattr(644,root,root,755)
 %{_datadir}/octave/site/m/sndfile_*.m
 %dir %{_libdir}/octave/*/site/oct/*/sndfile
 %{_libdir}/octave/*/site/oct/*/sndfile/PKG_ADD
 %attr(755,root,root) %{_libdir}/octave/*/site/oct/*/sndfile/sndfile.oct
 %endif
-
-%files progs
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/sndfile-*
-%{_mandir}/man1/sndfile-*.1*
