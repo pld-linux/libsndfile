@@ -37,6 +37,8 @@ Requires:	libvorbis >= 1:1.2.3
 Obsoletes:	libsndfile1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+%define no_install_post_check_so 1
+
 %description
 Libsndfile is a C library for reading and writing files containing
 sampled sound (such as MS Windows WAV and the Apple/SGI AIFF format)
