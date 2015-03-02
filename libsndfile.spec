@@ -3,7 +3,7 @@
 #
 # Conditional build:
 %bcond_with	regtest		# build sndfile-regtest program
-%bcond_without	octave		# don't build octave binding
+%bcond_with	octave		# don't build octave binding
 %bcond_without	static_libs	# don't build static library
 %bcond_without	tests		# don't build tests
 #
@@ -11,7 +11,7 @@ Summary:	C library for reading and writing files containing sampled sound
 Summary(pl.UTF-8):	Biblioteka obsługi plików dźwiękowych
 Name:		libsndfile
 Version:	1.0.25
-Release:	8
+Release:	9
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://www.mega-nerd.com/libsndfile/files/%{name}-%{version}.tar.gz
