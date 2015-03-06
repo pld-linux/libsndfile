@@ -3,20 +3,24 @@
 #
 # Conditional build:
 %bcond_with	regtest		# build sndfile-regtest program
-%bcond_with	octave		# don't build octave binding
+%bcond_without	octave		# don't build octave binding
 %bcond_without	static_libs	# don't build static library
 %bcond_without	tests		# don't build tests
 #
+%ifarch x32
+%undefine	with_octave
+%endif
 Summary:	C library for reading and writing files containing sampled sound
 Summary(pl.UTF-8):	Biblioteka obsługi plików dźwiękowych
 Name:		libsndfile
 Version:	1.0.25
-Release:	9
+Release:	10
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://www.mega-nerd.com/libsndfile/files/%{name}-%{version}.tar.gz
 # Source0-md5:	e2b7bb637e01022c7d20f95f9c3990a2
 Patch0:		octave32.patch
+Patch1:		%{name}-link.patch
 URL:		http://www.mega-nerd.com/libsndfile/
 BuildRequires:	alsa-lib-devel
 BuildRequires:	autoconf >= 2.57
@@ -36,8 +40,6 @@ Requires:	libogg >= 2:1.1.3
 Requires:	libvorbis >= 1:1.2.3
 Obsoletes:	libsndfile1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
-%define no_install_post_check_so 1
 
 %description
 Libsndfile is a C library for reading and writing files containing
@@ -115,6 +117,7 @@ dźwiękowych.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %if %{without tests}
 %{__sed} -i 's, tests$,,' Makefile.am
@@ -126,12 +129,13 @@ dźwiękowych.
 %{__autoconf}
 %{__automake}
 %configure \
-	%{!?with_static_libs:--disable-static} \
-	%{!?with_regtest:--disable-sqlite}
+	--disable-silent-rules \
+	%{!?with_regtest:--disable-sqlite} \
+	%{!?with_static_libs:--disable-static}
 
-%{__make} \
-	V=1
-%{?with_tests: %{__make} test}
+%{__make}
+
+%{?with_tests:%{__make} test}
 
 %install
 rm -rf $RPM_BUILD_ROOT
