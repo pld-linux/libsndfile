@@ -7,9 +7,6 @@
 %bcond_without	static_libs	# don't build static library
 %bcond_without	tests		# don't build tests
 #
-%ifarch x32
-%undefine	with_octave
-%endif
 Summary:	C library for reading and writing files containing sampled sound
 Summary(pl.UTF-8):	Biblioteka obsługi plików dźwiękowych
 Name:		libsndfile
