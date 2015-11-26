@@ -10,29 +10,28 @@
 Summary:	C library for reading and writing files containing sampled sound
 Summary(pl.UTF-8):	Biblioteka obsługi plików dźwiękowych
 Name:		libsndfile
-Version:	1.0.25
-Release:	11
+Version:	1.0.26
+Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://www.mega-nerd.com/libsndfile/files/%{name}-%{version}.tar.gz
-# Source0-md5:	e2b7bb637e01022c7d20f95f9c3990a2
+# Source0-md5:	ec810a0c60c08772a8a5552704b63393
 Patch0:		octave32.patch
-Patch1:		%{name}-link.patch
 URL:		http://www.mega-nerd.com/libsndfile/
 BuildRequires:	alsa-lib-devel
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake
-BuildRequires:	flac-devel >= 1.2.1
+BuildRequires:	flac-devel >= 1.3.1
 BuildRequires:	gcc-fortran
 BuildRequires:	libogg-devel >= 2:1.1.3
 %{?with_tests:BuildRequires:	libstdc++-devel}
 BuildRequires:	libtool
 BuildRequires:	libvorbis-devel >= 1:1.2.3
-%{?with_octave:BuildRequires:	octave-devel}
+%{?with_octave:BuildRequires:	octave-devel >= 2:3}
 BuildRequires:	pkgconfig
 BuildRequires:	sed >= 4.0
 %{?with_regtest:BuildRequires:	sqlite3-devel >= 3.2}
-Requires:	flac >= 1.2.1
+Requires:	flac >= 1.3.1
 Requires:	libogg >= 2:1.1.3
 Requires:	libvorbis >= 1:1.2.3
 Obsoletes:	libsndfile1
@@ -54,7 +53,7 @@ Summary:	libsndfile header files and development documentation
 Summary(pl.UTF-8):	Pliki nagłówkowe oraz dokumentacja do libsndfile
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	flac-devel >= 1.2.1
+Requires:	flac-devel >= 1.3.1
 Requires:	libogg-devel >= 2:1.1.3
 Requires:	libvorbis-devel >= 1:1.2.3
 Obsoletes:	libsndfile1-devel
@@ -100,7 +99,7 @@ Summary:	sndfile module for Octave
 Summary(pl.UTF-8):	Moduł sndfile dla Octave
 Group:		Applications/Math
 Requires:	%{name} = %{version}-%{release}
-Requires:	octave
+Requires:	octave >= 2:3
 Obsoletes:	libsndfile-octave
 
 %description -n octave-sndfile
@@ -114,7 +113,6 @@ dźwiękowych.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
 
 %if %{without tests}
 %{__sed} -i 's, tests$,,' Makefile.am
@@ -140,7 +138,8 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-%{__rm} -r $RPM_BUILD_ROOT%{_docdir}/libsndfile1-dev
+# packaged as %doc
+%{__rm} -r $RPM_BUILD_ROOT%{_docdir}/libsndfile
 
 %clean
 rm -rf $RPM_BUILD_ROOT
