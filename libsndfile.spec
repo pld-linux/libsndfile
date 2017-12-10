@@ -10,12 +10,12 @@
 Summary:	C library for reading and writing files containing sampled sound
 Summary(pl.UTF-8):	Biblioteka obsługi plików dźwiękowych
 Name:		libsndfile
-Version:	1.0.27
-Release:	2
+Version:	1.0.28
+Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://www.mega-nerd.com/libsndfile/files/%{name}-%{version}.tar.gz
-# Source0-md5:	fd1d97c6077f03b5d984d7956ffedb7a
+# Source0-md5:	646b5f98ce89ac60cdb060fcd398247c
 Patch0:		octave32.patch
 URL:		http://www.mega-nerd.com/libsndfile/
 BuildRequires:	alsa-lib-devel
@@ -25,7 +25,7 @@ BuildRequires:	flac-devel >= 1.3.1
 BuildRequires:	gcc-fortran
 BuildRequires:	libogg-devel >= 2:1.1.3
 %{?with_tests:BuildRequires:	libstdc++-devel}
-BuildRequires:	libtool
+BuildRequires:	libtool >= 2:2
 BuildRequires:	libvorbis-devel >= 1:1.2.3
 %{?with_octave:BuildRequires:	octave-devel >= 2:3}
 BuildRequires:	pkgconfig
@@ -124,6 +124,7 @@ dźwiękowych.
 %{__autoconf}
 %{__automake}
 %configure \
+	%{!?with_octave:--disable-octave} \
 	--disable-silent-rules \
 	%{!?with_regtest:--disable-sqlite} \
 	%{!?with_static_libs:--disable-static}
