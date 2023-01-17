@@ -2,10 +2,10 @@
 #	- who needs sndfile-regtest?
 #
 # Conditional build:
-%bcond_with	regtest		# build sndfile-regtest program
-%bcond_without	octave		# don't build octave binding
-%bcond_without	static_libs	# don't build static library
-%bcond_without	tests		# don't build tests
+%bcond_with	regtest		# sndfile-regtest program
+%bcond_without	octave		# octave binding
+%bcond_without	static_libs	# static library
+%bcond_without	tests		# unit tests
 #
 Summary:	C library for reading and writing files containing sampled sound
 Summary(pl.UTF-8):	Biblioteka obsługi plików dźwiękowych
@@ -21,6 +21,7 @@ Patch0:		octave32.patch
 URL:		http://www.mega-nerd.com/libsndfile/
 BuildRequires:	alsa-lib-devel
 BuildRequires:	autoconf >= 2.69
+%{?with_tests:BuildRequires:	autogen}
 BuildRequires:	automake >= 1:1.14
 BuildRequires:	flac-devel >= 1.3.1
 BuildRequires:	gcc-fortran
