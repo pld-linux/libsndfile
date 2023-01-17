@@ -10,30 +10,36 @@
 Summary:	C library for reading and writing files containing sampled sound
 Summary(pl.UTF-8):	Biblioteka obsługi plików dźwiękowych
 Name:		libsndfile
-Version:	1.0.28
-Release:	2
+Version:	1.2.0
+Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
-Source0:	http://www.mega-nerd.com/libsndfile/files/%{name}-%{version}.tar.gz
-# Source0-md5:	646b5f98ce89ac60cdb060fcd398247c
+#Source0Download: https://github.com/libsndfile/libsndfile/releases
+Source0:	https://github.com/libsndfile/libsndfile/archive/%{version}/%{name}-%{version}.tar.gz
+# Source0-md5:	015d2e3617241f293237bf1675f92486
 Patch0:		octave32.patch
 URL:		http://www.mega-nerd.com/libsndfile/
 BuildRequires:	alsa-lib-devel
-BuildRequires:	autoconf >= 2.57
-BuildRequires:	automake
+BuildRequires:	autoconf >= 2.69
+BuildRequires:	automake >= 1:1.14
 BuildRequires:	flac-devel >= 1.3.1
 BuildRequires:	gcc-fortran
-BuildRequires:	libogg-devel >= 2:1.1.3
+BuildRequires:	lame-libs-devel
+BuildRequires:	libmpg123-devel >= 1.25.10
+BuildRequires:	libogg-devel >= 2:1.3.0
 %{?with_tests:BuildRequires:	libstdc++-devel}
 BuildRequires:	libtool >= 2:2
 BuildRequires:	libvorbis-devel >= 1:1.2.3
 %{?with_octave:BuildRequires:	octave-devel >= 2:3}
+BuildRequires:	opus-devel >= 1.1
 BuildRequires:	pkgconfig
 BuildRequires:	sed >= 4.0
 %{?with_regtest:BuildRequires:	sqlite3-devel >= 3.2}
 Requires:	flac >= 1.3.1
-Requires:	libogg >= 2:1.1.3
+Requires:	libmpg123 >= 1.25.10
+Requires:	libogg >= 2:1.3.0
 Requires:	libvorbis >= 1:1.2.3
+Requires:	opus >= 1.1
 Obsoletes:	libsndfile1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -54,8 +60,11 @@ Summary(pl.UTF-8):	Pliki nagłówkowe oraz dokumentacja do libsndfile
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	flac-devel >= 1.3.1
-Requires:	libogg-devel >= 2:1.1.3
+Requires:	lame-libs-devel
+Requires:	libmpg123-devel >= 1.25.10
+Requires:	libogg-devel >= 2:1.3.0
 Requires:	libvorbis-devel >= 1:1.2.3
+Requires:	opus-devel >= 1.1
 Obsoletes:	libsndfile1-devel
 
 %description devel
@@ -120,14 +129,15 @@ dźwiękowych.
 
 %build
 %{__libtoolize}
-%{__aclocal} -I M4
+%{__aclocal} -I m4
 %{__autoconf}
+%{__autoheader}
 %{__automake}
 %configure \
 	%{!?with_octave:--disable-octave} \
 	--disable-silent-rules \
 	%{!?with_regtest:--disable-sqlite} \
-	%{!?with_static_libs:--disable-static}
+	%{?with_static_libs:--enable-static}
 
 %{__make}
 
@@ -150,13 +160,13 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS README
+%doc AUTHORS CHANGELOG.md ChangeLog NEWS.OLD README SECURITY.md
 %attr(755,root,root) %{_libdir}/libsndfile.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libsndfile.so.1
 
 %files devel
 %defattr(644,root,root,755)
-%doc doc/*.html doc/*.jpg doc/new_file_type.HOWTO
+%doc docs/*
 %attr(755,root,root) %{_libdir}/libsndfile.so
 %{_libdir}/libsndfile.la
 %{_includedir}/sndfile.h*
