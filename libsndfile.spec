@@ -10,13 +10,13 @@
 Summary:	C library for reading and writing files containing sampled sound
 Summary(pl.UTF-8):	Biblioteka obsługi plików dźwiękowych
 Name:		libsndfile
-Version:	1.2.0
+Version:	1.2.2
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 #Source0Download: https://github.com/libsndfile/libsndfile/releases
 Source0:	https://github.com/libsndfile/libsndfile/archive/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	015d2e3617241f293237bf1675f92486
+# Source0-md5:	9fe64f68622e54badb5d4bf658fc940a
 Patch0:		octave32.patch
 URL:		http://www.mega-nerd.com/libsndfile/
 BuildRequires:	alsa-lib-devel
@@ -110,7 +110,7 @@ Summary(pl.UTF-8):	Moduł sndfile dla Octave
 Group:		Applications/Math
 Requires:	%{name} = %{version}-%{release}
 Requires:	octave >= 2:3
-Obsoletes:	libsndfile-octave
+Obsoletes:	libsndfile-octave < 1.0.23
 
 %description -n octave-sndfile
 A couple of script files for loading, saving, and playing sound files
