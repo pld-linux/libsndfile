@@ -15,8 +15,8 @@ Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 #Source0Download: https://github.com/libsndfile/libsndfile/releases
-Source0:	https://github.com/libsndfile/libsndfile/archive/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	9fe64f68622e54badb5d4bf658fc940a
+Source0:	https://github.com/libsndfile/libsndfile/releases/download/%{version}/%{name}-%{version}.tar.xz
+# Source0-md5:	04e2e6f726da7c5dc87f8cf72f250d04
 Patch0:		octave32.patch
 URL:		http://www.mega-nerd.com/libsndfile/
 BuildRequires:	alsa-lib-devel
@@ -36,6 +36,8 @@ BuildRequires:	opus-devel >= 1.1
 BuildRequires:	pkgconfig
 BuildRequires:	sed >= 4.0
 %{?with_regtest:BuildRequires:	sqlite3-devel >= 3.2}
+BuildRequires:	tar >= 1:1.22
+BuildRequires:	xz
 Requires:	flac >= 1.3.1
 Requires:	libmpg123 >= 1.25.10
 Requires:	libogg >= 2:1.3.0
