@@ -124,7 +124,7 @@ dźwiękowych.
 
 %prep
 %setup -q
-%patch0 -p1
+%patch -P0 -p1
 
 %if %{without tests}
 %{__sed} -i 's, tests$,,' Makefile.am
