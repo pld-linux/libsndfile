@@ -1,0 +1,15 @@
+--- libsndfile-1.2.2/Makefile.am.orig	2025-02-14 18:03:09.204974042 +0100
++++ libsndfile-1.2.2/Makefile.am	2025-02-14 18:26:00.284673105 +0100
+@@ -6,9 +6,11 @@
+ 
+ CLEANFILES = programs/*.wav octave-workspace
+ 
++SUBDIRS = .
++
+ if FULL_SUITE
+ if BUILD_OCTAVE_MOD
+-SUBDIRS = Octave
++SUBDIRS += Octave
+ endif
+ endif
+ 
