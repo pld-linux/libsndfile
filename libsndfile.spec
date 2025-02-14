@@ -18,6 +18,7 @@ Group:		Libraries
 Source0:	https://github.com/libsndfile/libsndfile/releases/download/%{version}/%{name}-%{version}.tar.xz
 # Source0-md5:	04e2e6f726da7c5dc87f8cf72f250d04
 Patch0:		octave32.patch
+Patch1:		octave-include-dir.patch
 URL:		http://www.mega-nerd.com/libsndfile/
 BuildRequires:	alsa-lib-devel
 BuildRequires:	autoconf >= 2.69
@@ -125,6 +126,7 @@ dźwiękowych.
 %prep
 %setup -q
 %patch -P0 -p1
+%patch -P1 -p1
 
 %if %{without tests}
 %{__sed} -i 's, tests$,,' Makefile.am
