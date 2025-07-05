@@ -5,7 +5,7 @@
  				AC_MSG_WARN([Octave version 2.X is not supported.])
  				;;
 -			3.*)
-+			3.*|4.*|5.*|6.*)
++			3.*|4.*|5.*|6.*|7.*)
  				OCTAVE_DEST_ODIR=`$OCTAVE_CONFIG --oct-site-dir | sed 's%^/usr%${prefix}%'`
  				OCTAVE_DEST_MDIR=`$OCTAVE_CONFIG --m-site-dir | sed 's%^/usr%${prefix}%'`
  
